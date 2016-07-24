@@ -53,7 +53,7 @@ display(data.describe())
 # ### Implementation: Selecting Samples
 # To get a better understanding of the customers and how their data will transform through the analysis, it would be best to select a few sample data points and explore them in more detail. In the code block below, add **three** indices of your choice to the `indices` list which will represent the customers to track. It is suggested to try different sets of samples until you obtain customers that vary significantly from one another.
 
-# In[24]:
+# In[3]:
 
 # TODO: Select three indices of your choice you wish to sample from the dataset
 indices = [0,1,2]
@@ -87,19 +87,57 @@ pd.scatter_matrix(data, hist_kwds={'bins': 20}, figsize=(15, 15))
 #  - Import a decision tree regressor, set a `random_state`, and fit the learner to the training data.
 #  - Report the prediction score of the testing set using the regressor's `score` function.
 
-# In[ ]:
+# In[10]:
 
-# TODO: Make a copy of the DataFrame, using the 'drop' function to drop the given feature
-new_data = None
+def visual_gridsearch(model, X, y):
+    from matplotlib import colors
+    from matplotlib.colors import ListedColormap
+    import matplotlib.pyplot as plt
 
-# TODO: Split the data into training and testing sets using the given feature as the target
-X_train, X_test, y_train, y_test = (None, None, None, None)
+    ddl_heat = ['#DBDBDB','#DCD5CC','#DCCEBE','#DDC8AF','#DEC2A0','#DEBB91',                
+                '#DFB583','#DFAE74','#E0A865','#E1A256','#E19B48','#E29539']
+    ddlheatmap = colors.ListedColormap(ddl_heat)
+    C_range = np.logspace(1, 5, num=5)
+    gamma_range = np.logspace(-2, 5, num=5)
+    param_grid = dict(gamma=gamma_range, C=C_range)
+    grid = grid_search.GridSearchCV(model, param_grid=param_grid)
+    grid.fit(X, y)
 
-# TODO: Create a decision tree regressor and fit it to the training set
-regressor = None
+    scores = [x[1] for x in grid.grid_scores_]
+    scores = np.array(scores).reshape(len(C_range), len(gamma_range))
 
-# TODO: Report the score of the prediction using the testing set
-score = None
+    plt.figure(figsize=(8, 6))
+    plt.subplots_adjust(left=.2, right=0.95, bottom=0.15, top=0.95)
+    plt.imshow(scores, interpolation='nearest', cmap=ddlheatmap)
+    plt.xlabel('gamma')
+    plt.ylabel('C')
+    plt.colorbar()
+    plt.xticks(np.arange(len(gamma_range)), gamma_range, rotation=45)
+    plt.yticks(np.arange(len(C_range)), C_range)
+    plt.title(
+        "The best parameters are {} with a score of {:0.2f}.".format(
+        grid.best_params_, grid.best_score_)
+    )
+    plt.show()
+    return grid
+
+
+for col in ["Fresh", "Milk", "Grocery", "Frozen", "Detergents_Paper", "Delicatessen"]:
+    # TODO: Make a copy of the DataFrame, using the 'drop' function to drop the given feature
+    new_data = data.drop(col,axis=1)
+    y = data[col]
+
+    # TODO: Split the data into training and testing sets using the given feature as the target
+    from sklearn.cross_validation import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(new_data, y, test_size=0.25, random_state=1)
+
+    # TODO: Create a decision tree regressor and fit it to the training set
+    from sklearn import svm, grid_search
+    regressor = visual_gridsearch(svm.SVR(),X_train, y_train)
+
+    # TODO: Report the score of the prediction using the testing set
+    score = regressor.score(X_test,y_test)
+    print col,"\tscore: ", score
 
 
 # ### Question 2
@@ -107,11 +145,15 @@ score = None
 # **Hint:** The coefficient of determination, `R^2`, is scored between 0 and 1, with 1 being a perfect fit. A negative `R^2` implies the model fails to fit the data.
 
 # **Answer:**
+# 
+# I tried to make prediction for all the features separately using gridsearchCV. 
+# Based on the results (all prediction scores were negative) the with SVR we cannot estimate the missing item. The models failed.
+# 
 
 # ### Visualize Feature Distributions
 # To get a better understanding of the dataset, we can construct a scatter matrix of each of the six product features present in the data. If you found that the feature you attempted to predict above is relevant for identifying a specific customer, then the scatter matrix below may not show any correlation between that feature and the others. Conversely, if you believe that feature is not relevant for identifying a specific customer, the scatter matrix might show a correlation between that feature and another feature in the data. Run the code block below to produce a scatter matrix.
 
-# In[ ]:
+# In[11]:
 
 # Produce a scatter matrix for each pair of features in the data
 pd.scatter_matrix(data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
@@ -122,6 +164,13 @@ pd.scatter_matrix(data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
 # **Hint:** Is the data normally distributed? Where do most of the data points lie? 
 
 # **Answer:**
+# 
+# All the data has a scewed distribution to the right.
+# 
+# In case of some pairs like grocery-detergents or grocery-milk we can see some proportionality, in other cases like grocery-fresh or detergents-fresh the relationship is more likely reciprocal. The most of the datapoints are closer to the origo, the farther we are from the origo the less points are there.
+# 
+# Based on the scatter plots it can be seen, that there are relations between the features.
+# Probably there is a way to make a better preditor than we did previously.
 
 # ## Data Preprocessing
 # In this section, you will preprocess the data to create a better representation of customers by performing a scaling on the data and detecting (and optionally removing) outliers. Preprocessing data is often times a critical step in assuring that results you obtain from your analysis are significant and meaningful.
