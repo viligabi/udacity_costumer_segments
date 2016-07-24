@@ -72,6 +72,10 @@ pd.scatter_matrix(data, hist_kwds={'bins': 20}, figsize=(15, 15))
 # **Hint:** Examples of establishments include places like markets, cafes, and retailers, among many others. Avoid using names for establishments, such as saying *"McDonalds"* when describing a sample customer as a restaurant.
 
 # **Answer:**
+# Based on the mean value of yearly spendings delicatessen, detergents paper and frozen goods probably popular among the costumers who make low volume sales such as retailers, cafes.
+# 
+# Milk, grocery and fresh goods are probably mostly bought by high volume costumers such as restaurant chains, hypermarkets etc.
+# Note that by these goods the standard deviation also higher which indicates that the low volume costumers are represented too.
 
 # ### Implementation: Feature Relevance
 # One interesting thought to consider is if one (or more) of the six product categories is actually relevant for understanding customer purchasing. That is to say, is it possible to determine whether customers purchasing some amount of one category of products will necessarily purchase some proportional amount of another category of products? We can make this determination quite easily by training a supervised regression learner on a subset of the data with one feature removed, and then score how well that model can predict the removed feature.
