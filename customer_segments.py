@@ -19,7 +19,7 @@
 # 
 # Run the code block below to load the wholesale customers dataset, along with a few of the necessary Python libraries required for this project. You will know the dataset loaded successfully if the size of the dataset is reported.
 
-# In[ ]:
+# In[1]:
 
 # Import libraries necessary for this project
 import numpy as np
@@ -44,7 +44,7 @@ except:
 # 
 # Run the code block below to observe a statistical description of the dataset. Note that the dataset is composed of six important product categories: **'Fresh'**, **'Milk'**, **'Grocery'**, **'Frozen'**, **'Detergents_Paper'**, and **'Delicatessen'**. Consider what each category represents in terms of products you could purchase.
 
-# In[ ]:
+# In[2]:
 
 # Display a description of the dataset
 display(data.describe())
@@ -53,15 +53,17 @@ display(data.describe())
 # ### Implementation: Selecting Samples
 # To get a better understanding of the customers and how their data will transform through the analysis, it would be best to select a few sample data points and explore them in more detail. In the code block below, add **three** indices of your choice to the `indices` list which will represent the customers to track. It is suggested to try different sets of samples until you obtain customers that vary significantly from one another.
 
-# In[ ]:
+# In[24]:
 
 # TODO: Select three indices of your choice you wish to sample from the dataset
-indices = []
+indices = [0,1,2]
 
 # Create a DataFrame of the chosen samples
 samples = pd.DataFrame(data.loc[indices], columns = data.keys()).reset_index(drop = True)
 print "Chosen samples of wholesale customers dataset:"
 display(samples)
+
+pd.scatter_matrix(data, hist_kwds={'bins': 20}, figsize=(15, 15))
 
 
 # ### Question 1
