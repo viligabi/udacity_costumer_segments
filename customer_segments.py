@@ -182,7 +182,7 @@ pd.scatter_matrix(data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
 #  - Assign a copy of the data to `log_data` after applying a logarithm scaling. Use the `np.log` function for this.
 #  - Assign a copy of the sample data to `log_samples` after applying a logrithm scaling. Again, use `np.log`.
 
-# In[ ]:
+# In[6]:
 
 # TODO: Scale the data using the natural logarithm
 log_data = np.log(data)
@@ -199,7 +199,7 @@ pd.scatter_matrix(log_data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
 # 
 # Run the code below to see how the sample data has changed after having the natural logarithm applied to it.
 
-# In[ ]:
+# In[7]:
 
 # Display the log-transformed sample data
 display(log_samples)
@@ -217,29 +217,37 @@ display(log_samples)
 # **NOTE:** If you choose to remove any outliers, ensure that the sample data does not contain any of these points!  
 # Once you have performed this implementation, the dataset will be stored in the variable `good_data`.
 
-# In[ ]:
+# In[18]:
 
 # For each feature find the data points with extreme high or low values
+outliers = []
 for feature in log_data.keys():
     
     # TODO: Calculate Q1 (25th percentile of the data) for the given feature
-    Q1 = None
+    Q1 = np.percentile(log_data[feature], 25)
+    print Q1
     
     # TODO: Calculate Q3 (75th percentile of the data) for the given feature
-    Q3 = None
+    Q3 = np.percentile(log_data[feature], 75)
+    print Q3
     
     # TODO: Use the interquartile range to calculate an outlier step (1.5 times the interquartile range)
-    step = None
+    step = 1.5*(Q3-Q1)
     
     # Display the outliers
     print "Data points considered outliers for the feature '{}':".format(feature)
-    display(log_data[~((log_data[feature] >= Q1 - step) & (log_data[feature] <= Q3 + step))])
+    out = log_data[~((log_data[feature] >= Q1 - step) & (log_data[feature] <= Q3 + step))][feature]
+    
+    display(out)
+    outliers = list(set(outliers) | set(out._index))
     
 # OPTIONAL: Select the indices for data points you wish to remove
-outliers  = []
+# outliers  = out[feature]._index
 
 # Remove the outliers, if any were specified
+print np.sort(outliers)
 good_data = log_data.drop(log_data.index[outliers]).reset_index(drop = True)
+print good_data
 
 
 # ### Question 4
