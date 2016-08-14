@@ -87,7 +87,7 @@ pd.scatter_matrix(data, hist_kwds={'bins': 20}, figsize=(15, 15))
 #  - Import a decision tree regressor, set a `random_state`, and fit the learner to the training data.
 #  - Report the prediction score of the testing set using the regressor's `score` function.
 
-# In[10]:
+# In[4]:
 
 def visual_gridsearch(model, X, y):
     from matplotlib import colors
@@ -147,13 +147,13 @@ for col in ["Fresh", "Milk", "Grocery", "Frozen", "Detergents_Paper", "Delicates
 # **Answer:**
 # 
 # I tried to make prediction for all the features separately using gridsearchCV. 
-# Based on the results (all prediction scores were negative) the with SVR we cannot estimate the missing item. The models failed.
+# Based on the results (all prediction scores were negative) with the SVR we cannot estimate the missing item. The models failed.
 # 
 
 # ### Visualize Feature Distributions
 # To get a better understanding of the dataset, we can construct a scatter matrix of each of the six product features present in the data. If you found that the feature you attempted to predict above is relevant for identifying a specific customer, then the scatter matrix below may not show any correlation between that feature and the others. Conversely, if you believe that feature is not relevant for identifying a specific customer, the scatter matrix might show a correlation between that feature and another feature in the data. Run the code block below to produce a scatter matrix.
 
-# In[11]:
+# In[5]:
 
 # Produce a scatter matrix for each pair of features in the data
 pd.scatter_matrix(data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
