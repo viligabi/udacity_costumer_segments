@@ -266,13 +266,14 @@ print good_data
 #  - Import `sklearn.decomposition.PCA` and assign the results of fitting PCA in six dimensions with `good_data` to `pca`.
 #  - Apply a PCA transformation of the sample log-data `log_samples` using `pca.transform`, and assign the results to `pca_samples`.
 
-# In[ ]:
+# In[23]:
 
+from sklearn.decomposition import PCA
 # TODO: Apply PCA to the good data with the same number of dimensions as features
-pca = None
+pca = PCA(n_components=6)
 
 # TODO: Apply a PCA transformation to the sample log-data
-pca_samples = None
+pca_samples = pca.fit(log_samples)
 
 # Generate PCA results plot
 pca_results = rs.pca_results(good_data, pca)
