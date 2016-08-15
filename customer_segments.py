@@ -302,7 +302,7 @@ display(pd.DataFrame(np.round(pca_samples, 4), columns = pca_results.index.value
 #  - Apply a PCA transformation of `good_data` using `pca.transform`, and assign the reuslts to `reduced_data`.
 #  - Apply a PCA transformation of the sample log-data `log_samples` using `pca.transform`, and assign the results to `pca_samples`.
 
-# In[17]:
+# In[24]:
 
 # TODO: Fit PCA to the good data using only two dimensions
 pca = PCA(n_components=2).fit(good_data)
@@ -315,6 +315,7 @@ pca_samples = pca.transform(log_samples)
 
 # Create a DataFrame for the reduced data
 reduced_data = pd.DataFrame(reduced_data, columns = ['Dimension 1', 'Dimension 2'])
+print reduced_data.shape
 
 
 # ### Observation
@@ -346,22 +347,30 @@ display(pd.DataFrame(np.round(pca_samples, 4), columns = ['Dimension 1', 'Dimens
 #  - Import sklearn.metrics.silhouette_score and calculate the silhouette score of `reduced_data` against `preds`.
 #    - Assign the silhouette score to `score` and print the result.
 
-# In[ ]:
+# In[63]:
 
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+import matplotlib.pyplot as plt
 # TODO: Apply your clustering algorithm of choice to the reduced data 
-clusterer = None
+clusterer = KMeans(n_clusters=10, random_state=1).fit(reduced_data)
 
 # TODO: Predict the cluster for each data point
-preds = None
+preds = clusterer.predict(reduced_data)
+plt.scatter(reduced_data["Dimension 1"], reduced_data["Dimension 2"], c=preds)
 
 # TODO: Find the cluster centers
-centers = None
+centers = clusterer.cluster_centers_
+#print "centers \n", centers
 
 # TODO: Predict the cluster for each transformed sample data point
-sample_preds = None
+sample_preds = clusterer.predict(pca_samples)
+print "samples"
+print pca_samples, sample_preds
 
 # TODO: Calculate the mean silhouette coefficient for the number of clusters chosen
-score = None
+score = silhouette_score(reduced_data, preds)
+print score
 
 
 # ### Question 7
