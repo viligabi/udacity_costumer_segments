@@ -217,7 +217,7 @@ display(log_samples)
 # **NOTE:** If you choose to remove any outliers, ensure that the sample data does not contain any of these points!  
 # Once you have performed this implementation, the dataset will be stored in the variable `good_data`.
 
-# In[18]:
+# In[8]:
 
 # For each feature find the data points with extreme high or low values
 outliers = []
@@ -266,14 +266,14 @@ print good_data
 #  - Import `sklearn.decomposition.PCA` and assign the results of fitting PCA in six dimensions with `good_data` to `pca`.
 #  - Apply a PCA transformation of the sample log-data `log_samples` using `pca.transform`, and assign the results to `pca_samples`.
 
-# In[23]:
+# In[11]:
 
 from sklearn.decomposition import PCA
 # TODO: Apply PCA to the good data with the same number of dimensions as features
-pca = PCA(n_components=6)
+pca = PCA(n_components=6).fit(good_data)
 
 # TODO: Apply a PCA transformation to the sample log-data
-pca_samples = pca.fit(log_samples)
+pca_samples = pca.transform(log_samples)
 
 # Generate PCA results plot
 pca_results = rs.pca_results(good_data, pca)
@@ -288,7 +288,7 @@ pca_results = rs.pca_results(good_data, pca)
 # ### Observation
 # Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it in six dimensions. Observe the numerical value for the first four dimensions of the sample points. Consider if this is consistent with your initial interpretation of the sample points.
 
-# In[ ]:
+# In[10]:
 
 # Display sample log-data after having a PCA transformation applied
 display(pd.DataFrame(np.round(pca_samples, 4), columns = pca_results.index.values))
