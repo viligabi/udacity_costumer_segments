@@ -395,13 +395,13 @@ rs.cluster_results(reduced_data, preds, centers, pca_samples)
 #  - Apply the inverse function of `np.log` to `log_centers` using `np.exp` and assign the true centers to `true_centers`.
 # 
 
-# In[ ]:
+# In[72]:
 
 # TODO: Inverse transform the centers
-log_centers = None
+log_centers = pca.inverse_transform(centers)
 
 # TODO: Exponentiate the centers
-true_centers = None
+true_centers = np.exp(log_centers)
 
 # Display the true centers
 segments = ['Segment {}'.format(i) for i in range(0,len(centers))]
