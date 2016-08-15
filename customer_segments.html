@@ -11459,7 +11459,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after having a PCA transformation applied</span>
@@ -11475,30 +11475,54 @@ RU5ErkJggg==
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansired">---------------------------------------------------------------------------</span>
-<span class="ansired">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansigreen">&lt;ipython-input-10-295d804f10dd&gt;</span> in <span class="ansicyan">&lt;module&gt;</span><span class="ansiblue">()</span>
-<span class="ansigreen">      1</span> <span class="ansired"># Display sample log-data after having a PCA transformation applied</span><span class="ansiyellow"></span><span class="ansiyellow"></span>
-<span class="ansigreen">----&gt; 2</span><span class="ansiyellow"> </span>display<span class="ansiyellow">(</span>pd<span class="ansiyellow">.</span>DataFrame<span class="ansiyellow">(</span>np<span class="ansiyellow">.</span>round<span class="ansiyellow">(</span>pca_samples<span class="ansiyellow">,</span> <span class="ansicyan">4</span><span class="ansiyellow">)</span><span class="ansiyellow">,</span> columns <span class="ansiyellow">=</span> pca_results<span class="ansiyellow">.</span>index<span class="ansiyellow">.</span>values<span class="ansiyellow">)</span><span class="ansiyellow">)</span><span class="ansiyellow"></span>
 
-<span class="ansigreen">C:\Anaconda2\lib\site-packages\numpy\core\fromnumeric.pyc</span> in <span class="ansicyan">round_</span><span class="ansiblue">(a, decimals, out)</span>
-<span class="ansigreen">   2783</span>         round <span class="ansiyellow">=</span> a<span class="ansiyellow">.</span>round<span class="ansiyellow"></span>
-<span class="ansigreen">   2784</span>     <span class="ansigreen">except</span> AttributeError<span class="ansiyellow">:</span><span class="ansiyellow"></span>
-<span class="ansigreen">-&gt; 2785</span><span class="ansiyellow">         </span><span class="ansigreen">return</span> _wrapit<span class="ansiyellow">(</span>a<span class="ansiyellow">,</span> <span class="ansiblue">&apos;round&apos;</span><span class="ansiyellow">,</span> decimals<span class="ansiyellow">,</span> out<span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">   2786</span>     <span class="ansigreen">return</span> round<span class="ansiyellow">(</span>decimals<span class="ansiyellow">,</span> out<span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">   2787</span> <span class="ansiyellow"></span>
-
-<span class="ansigreen">C:\Anaconda2\lib\site-packages\numpy\core\fromnumeric.pyc</span> in <span class="ansicyan">_wrapit</span><span class="ansiblue">(obj, method, *args, **kwds)</span>
-<span class="ansigreen">     46</span>     <span class="ansigreen">except</span> AttributeError<span class="ansiyellow">:</span><span class="ansiyellow"></span>
-<span class="ansigreen">     47</span>         wrap <span class="ansiyellow">=</span> None<span class="ansiyellow"></span>
-<span class="ansigreen">---&gt; 48</span><span class="ansiyellow">     </span>result <span class="ansiyellow">=</span> getattr<span class="ansiyellow">(</span>asarray<span class="ansiyellow">(</span>obj<span class="ansiyellow">)</span><span class="ansiyellow">,</span> method<span class="ansiyellow">)</span><span class="ansiyellow">(</span><span class="ansiyellow">*</span>args<span class="ansiyellow">,</span> <span class="ansiyellow">**</span>kwds<span class="ansiyellow">)</span><span class="ansiyellow"></span>
-<span class="ansigreen">     49</span>     <span class="ansigreen">if</span> wrap<span class="ansiyellow">:</span><span class="ansiyellow"></span>
-<span class="ansigreen">     50</span>         <span class="ansigreen">if</span> <span class="ansigreen">not</span> isinstance<span class="ansiyellow">(</span>result<span class="ansiyellow">,</span> mu<span class="ansiyellow">.</span>ndarray<span class="ansiyellow">)</span><span class="ansiyellow">:</span><span class="ansiyellow"></span>
-
-<span class="ansired">TypeError</span>: unsupported operand type(s) for *: &apos;PCA&apos; and &apos;float&apos;</pre>
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dimension 1</th>
+      <th>Dimension 2</th>
+      <th>Dimension 3</th>
+      <th>Dimension 4</th>
+      <th>Dimension 5</th>
+      <th>Dimension 6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.7793</td>
+      <td>-0.6604</td>
+      <td>0.8247</td>
+      <td>-1.6580</td>
+      <td>0.0903</td>
+      <td>0.4808</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.8820</td>
+      <td>0.4617</td>
+      <td>-0.2764</td>
+      <td>-0.1055</td>
+      <td>0.0958</td>
+      <td>0.2093</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.9935</td>
+      <td>1.2471</td>
+      <td>-1.2157</td>
+      <td>-0.6134</td>
+      <td>-0.6732</td>
+      <td>0.3420</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+</div>
+
 </div>
 
 </div>
@@ -11523,17 +11547,17 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Fit PCA to the good data using only two dimensions</span>
-<span class="n">pca</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">good_data</span><span class="p">)</span>
 
 <span class="c1"># TODO: Apply a PCA transformation the good data</span>
-<span class="n">reduced_data</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">reduced_data</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">good_data</span><span class="p">)</span>
 
 <span class="c1"># TODO: Apply a PCA transformation to the sample log-data</span>
-<span class="n">pca_samples</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">pca_samples</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">log_samples</span><span class="p">)</span>
 
 <span class="c1"># Create a DataFrame for the reduced data</span>
 <span class="n">reduced_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">reduced_data</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dimension 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Dimension 2&#39;</span><span class="p">])</span>
@@ -11556,7 +11580,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Display sample log-data after applying PCA transformation in two dimensions</span>
@@ -11564,6 +11588,48 @@ RU5ErkJggg==
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dimension 1</th>
+      <th>Dimension 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.7793</td>
+      <td>-0.6604</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.8820</td>
+      <td>0.4617</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.9935</td>
+      <td>1.2471</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 

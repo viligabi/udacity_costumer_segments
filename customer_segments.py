@@ -288,7 +288,7 @@ pca_results = rs.pca_results(good_data, pca)
 # ### Observation
 # Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it in six dimensions. Observe the numerical value for the first four dimensions of the sample points. Consider if this is consistent with your initial interpretation of the sample points.
 
-# In[10]:
+# In[12]:
 
 # Display sample log-data after having a PCA transformation applied
 display(pd.DataFrame(np.round(pca_samples, 4), columns = pca_results.index.values))
@@ -302,16 +302,16 @@ display(pd.DataFrame(np.round(pca_samples, 4), columns = pca_results.index.value
 #  - Apply a PCA transformation of `good_data` using `pca.transform`, and assign the reuslts to `reduced_data`.
 #  - Apply a PCA transformation of the sample log-data `log_samples` using `pca.transform`, and assign the results to `pca_samples`.
 
-# In[ ]:
+# In[17]:
 
 # TODO: Fit PCA to the good data using only two dimensions
-pca = None
+pca = PCA(n_components=2).fit(good_data)
 
 # TODO: Apply a PCA transformation the good data
-reduced_data = None
+reduced_data = pca.transform(good_data)
 
 # TODO: Apply a PCA transformation to the sample log-data
-pca_samples = None
+pca_samples = pca.transform(log_samples)
 
 # Create a DataFrame for the reduced data
 reduced_data = pd.DataFrame(reduced_data, columns = ['Dimension 1', 'Dimension 2'])
@@ -320,7 +320,7 @@ reduced_data = pd.DataFrame(reduced_data, columns = ['Dimension 1', 'Dimension 2
 # ### Observation
 # Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it using only two dimensions. Observe how the values for the first two dimensions remains unchanged when compared to a PCA transformation in six dimensions.
 
-# In[ ]:
+# In[14]:
 
 # Display sample log-data after applying PCA transformation in two dimensions
 display(pd.DataFrame(np.round(pca_samples, 4), columns = ['Dimension 1', 'Dimension 2']))
