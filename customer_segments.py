@@ -347,7 +347,7 @@ display(pd.DataFrame(np.round(pca_samples, 4), columns = ['Dimension 1', 'Dimens
 #  - Import sklearn.metrics.silhouette_score and calculate the silhouette score of `reduced_data` against `preds`.
 #    - Assign the silhouette score to `score` and print the result.
 
-# In[63]:
+# In[68]:
 
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
@@ -381,7 +381,7 @@ print score
 # ### Cluster Visualization
 # Once you've chosen the optimal number of clusters for your clustering algorithm using the scoring metric above, you can now visualize the results by executing the code block below. Note that, for experimentation purposes, you are welcome to adjust the number of clusters for your clustering algorithm to see various visualizations. The final visualization provided should, however, correspond with the optimal number of clusters. 
 
-# In[ ]:
+# In[69]:
 
 # Display the results of the clustering from implementation
 rs.cluster_results(reduced_data, preds, centers, pca_samples)
