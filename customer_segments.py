@@ -169,7 +169,7 @@ pd.scatter_matrix(data, alpha = 0.3, figsize = (14,8), diagonal = 'kde');
 # 
 # In case of some pairs like grocery-detergents or grocery-milk we can see some proportionality, in other cases like grocery-fresh or detergents-fresh the relationship is more likely reciprocal. The most of the datapoints are closer to the origo, the farther we are from the origo the less points are there.
 # 
-# Based on the scatter plots it can be seen, that there are relations between the features.
+# Based on the scatter plots it can be seen, that there are relationships between the features.
 # Probably there is a way to make a better preditor than we did previously.
 
 # ## Data Preprocessing
@@ -266,7 +266,7 @@ print good_data
 #  - Import `sklearn.decomposition.PCA` and assign the results of fitting PCA in six dimensions with `good_data` to `pca`.
 #  - Apply a PCA transformation of the sample log-data `log_samples` using `pca.transform`, and assign the results to `pca_samples`.
 
-# In[11]:
+# In[9]:
 
 from sklearn.decomposition import PCA
 # TODO: Apply PCA to the good data with the same number of dimensions as features
@@ -288,7 +288,7 @@ pca_results = rs.pca_results(good_data, pca)
 # ### Observation
 # Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it in six dimensions. Observe the numerical value for the first four dimensions of the sample points. Consider if this is consistent with your initial interpretation of the sample points.
 
-# In[12]:
+# In[10]:
 
 # Display sample log-data after having a PCA transformation applied
 display(pd.DataFrame(np.round(pca_samples, 4), columns = pca_results.index.values))
@@ -302,7 +302,7 @@ display(pd.DataFrame(np.round(pca_samples, 4), columns = pca_results.index.value
 #  - Apply a PCA transformation of `good_data` using `pca.transform`, and assign the reuslts to `reduced_data`.
 #  - Apply a PCA transformation of the sample log-data `log_samples` using `pca.transform`, and assign the results to `pca_samples`.
 
-# In[24]:
+# In[11]:
 
 # TODO: Fit PCA to the good data using only two dimensions
 pca = PCA(n_components=2).fit(good_data)
@@ -321,7 +321,7 @@ print reduced_data.shape
 # ### Observation
 # Run the code below to see how the log-transformed sample data has changed after having a PCA transformation applied to it using only two dimensions. Observe how the values for the first two dimensions remains unchanged when compared to a PCA transformation in six dimensions.
 
-# In[14]:
+# In[12]:
 
 # Display sample log-data after applying PCA transformation in two dimensions
 display(pd.DataFrame(np.round(pca_samples, 4), columns = ['Dimension 1', 'Dimension 2']))
@@ -347,7 +347,7 @@ display(pd.DataFrame(np.round(pca_samples, 4), columns = ['Dimension 1', 'Dimens
 #  - Import sklearn.metrics.silhouette_score and calculate the silhouette score of `reduced_data` against `preds`.
 #    - Assign the silhouette score to `score` and print the result.
 
-# In[68]:
+# In[13]:
 
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
@@ -381,7 +381,7 @@ print score
 # ### Cluster Visualization
 # Once you've chosen the optimal number of clusters for your clustering algorithm using the scoring metric above, you can now visualize the results by executing the code block below. Note that, for experimentation purposes, you are welcome to adjust the number of clusters for your clustering algorithm to see various visualizations. The final visualization provided should, however, correspond with the optimal number of clusters. 
 
-# In[69]:
+# In[14]:
 
 # Display the results of the clustering from implementation
 rs.cluster_results(reduced_data, preds, centers, pca_samples)
@@ -395,7 +395,7 @@ rs.cluster_results(reduced_data, preds, centers, pca_samples)
 #  - Apply the inverse function of `np.log` to `log_centers` using `np.exp` and assign the true centers to `true_centers`.
 # 
 
-# In[72]:
+# In[15]:
 
 # TODO: Inverse transform the centers
 log_centers = pca.inverse_transform(centers)
@@ -421,7 +421,7 @@ display(true_centers)
 # 
 # Run the code block below to find which cluster each sample point is predicted to be.
 
-# In[ ]:
+# In[16]:
 
 # Display the predictions
 for i, pred in enumerate(sample_preds):
@@ -450,7 +450,7 @@ for i, pred in enumerate(sample_preds):
 # 
 # Run the code block below to see how each data point is labeled either `'HoReCa'` (Hotel/Restaurant/Cafe) or `'Retail'` the reduced space. In addition, you will find the sample points are circled in the plot, which will identify their labeling.
 
-# In[ ]:
+# In[17]:
 
 # Display the clustering results based on 'Channel' data
 rs.channel_results(reduced_data, outliers, pca_samples)
